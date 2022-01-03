@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.psw.chating.mappers.bbs">
+	
+	<!-- 로그인 SQL -->
+	<select id="login" resultType="Member">
+		SELECT *
+		FROM   Member
+		WHERE  m_id = #{m_id}
+		AND    m_pw = #{m_pw}
+	</select>
+		
+	<!-- 회원가입 SQL -->
+	<insert id="join" >
+		INSERT INTO MEMBER
+		VALUES(
+				#{m_id},#{m_pw},
+				#{m_name},#{m_aff},
+				#{m_gender},#{m_email},
+				#{m_tel},#{m_adr}
+				)
+	</insert>
+	
+	<!-- 회원정보보기 -->
+	<select id="viewMember" resultType="Member">
+		SELECT
+			m_id AS m_id,
+			m_pw AS m_pw,
+			m_name AS m_name,
+			m_aff AS m_aff,
+			m_gender AS m_gender,
+			m_email AS m_email,
+			m_tel AS m_tel,
+			m_adr AS m_adr
+			FORM MEMBER
+			WHERE m_id = #{m_id}
+			
+			
+
+	</select>
+	
+	<select id="readMember" resultType="Member">
+		select *
+		from MEMBER
+		where m_id=#{m_id}
+	</select>
+	
+	<!--회원정보 수정 -->
+	<update id ="changeInfo" >
+		UPDATE MEMBER
+		SET
+			m_pw = #{m_pw}
+			
+			
+			WHERE m_id = #{m_id}
+	
+		
+	</update>
+	
+	<!--  아이디찾기 -->
+	<select id="find_id" resultType="String">
+		select m_id
+		from MEMBER 
+		WHERE
+		 m_tel=#{m_tel} and m_name=#{m_name}
+	</select>
+		<!--  아이디찾기 -->
+	<select id="find_id2" resultType="String">
+		select m_id
+		from MEMBER 
+		WHERE
+		 m_email=#{m_email} and m_name=#{m_name}
+	</select>
+	
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatepw" >
+	UPDATE MEMBER
+	 set m_pw = #{m_pw} where m_id = #{m_id}
+	</update>
+	
+	<!-- 이메일 인증번호 불러오기 SQL -->
+	<select id="getAuthnum" resultType="int">
+		SELECT auth_num
+		FROM   AUTHMAIL
+		WHERE  m_email = #{m_email}
+	</select>
+	
+	<!-- 이메일 인증번호 저장 SQL -->
+	<insert id="setAuthnum">
+		INSERT INTO AUTHMAIL
+		VALUES (#{m_email}, #{auth_num})
+	</insert>
+	
+	<!-- 이메일 인증번호 수정 SQL -->
+	<update id="resetAuthnum">
+		UPDATE AUTHMAIL
+		SET    auth_num = #{auth_num}
+		WHERE  m_email = #{m_email}
+	</update>
+	
+	<!-- 이메일 인증번호 삭제 SQL -->
+	<delete id="deleteAuthmail">
+		DELETE FROM AUTHMAIL
+		WHERE  m_email = #{m_email}
+	</delete>
+	
+	<!-- 유저 아이디 중복체크 SQL -->
+	<select id="idCheck" resultType="string">
+		SELECT m_id
+		FROM   MEMBER
+		WHERE  m_id = #{m_id}
+	</select>
+	
+	 <!-- 게시물 쓰기 SQL -->
+	<insert id="write">
+		INSERT INTO BOARDER(writer, title, contents, reg_date, available)
+		VALUES (#{writer}, #{title}, #{contents}, now(), 0)
+		<selectKey keyProperty="boarder_id" resultType="_int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	 <!-- 파일 업로드 SQL  -->
+	<insert id="fileUpload">
+		INSERT INTO UPLOADFILE(boarder_id, file_name, file_realName, count)
+		VALUES (#{boarder_id}, #{file_name}, #{file_realName}, 0)
+	</insert>
+	
+	 <!-- 게시물 불러오기 SQL -->
+	<select id="getBoarder" parameterType="int" resultType="Boarder">
+		SELECT *
+		FROM   BOARDER
+		WHERE  boarder_id = #{boarder_id}
+		AND    available  = 0
+	</select>
+	
+	<!-- 게시글 삭제하기 SQL -->
+	<delete id="deleteBoarder">
+		DELETE FROM BOARDER
+		WHERE  boarder_id = #{boarder_id}
+	</delete>
+	
+	 <!-- 첨부파일 불러오기 SQL -->
+	<select id="getUploadFile" resultType="UploadFile">
+		SELECT *
+		FROM   UPLOADFILE
+		WHERE  boarder_id = #{boarder_id}
+	</select>
+	
+	 <!-- 첨부파일 불러오기 SQL -->
+	<select id="getUploadFileReal" resultType="UploadFile">
+		SELECT *
+		FROM   UPLOADFILE
+		WHERE  file_realName = #{file_realName}
+	</select>
+	
+	 <!-- 게시물 수정 SQL -->
+	<update id="updateBoarder">
+		UPDATE BOARDER
+		SET    title = #{title}, contents = #{contents}
+		WHERE  boarder_id = #{boarder_id}
+	</update>
+	
+	 <!--  업로드 파일 수정 SQL-->
+	<update id="updateFile">
+		UPDATE UPLOADFILE
+		SET    file_name = #{file_name}, file_realName = #{file_realName}
+		WHERE  boarder_id = #{boarder_id}
+	</update>
+	
+	 <!-- 게시글 최댓값 검색 SQL -->
+	<select id="getMaxBoarder_id" resultType="_int">
+		SELECT IFNULL(MAX(boarder_id), 0)
+		FROM   BOARDER
+	</select>
+	
+	 <!-- 게시글 리스트 10개 검색 SQL -->
+	<select id="getBbsList" resultType="Boarder">
+		SELECT boarder_id, writer, title, contents, DATE_FORMAT(reg_date , '%Y년%m월%d일 %H시%i분%S초') as reg_date, available
+		FROM   BOARDER
+		WHERE  boarder_id <![CDATA[<=]]> #{boarder_id}
+		AND    available = 0
+		ORDER BY boarder_id DESC
+		LIMIT  10
+	</select>
+	
+	 <!-- 다운로드 카운트 SQL -->
+	<update id="addDownloadCnt">
+		UPDATE UPLOADFILE
+		SET    count = count + 1
+		WHERE  file_id = #{file_id}
+	</update>
+	
+	 <!-- 게시물 카운트 SQL -->
+	<update id="addBoarderCnt">
+		UPDATE BOARDER
+		SET    count = count + 1
+		WHERE  boarder_id = #{boarder_id}
+	</update>
+	
+	 <!-- 댓글 리스트 불러오기 SQL -->
+	<select id="getReplyList" resultType="Reply">
+		SELECT *
+		FROM   REPLY
+		WHERE  boarder_id = #{boarder_id}
+	</select>
+	
+	 <!-- 댓글 달기 SQL -->
+	<insert id="insertReply">
+		INSERT INTO REPLY (boarder_id, writer, contents, reg_date)
+		VALUES (#{boarder_id}, #{writer}, #{contents}, now())
+	</insert>
+	
+	 <!-- 댓글 삭제 SQL -->
+	<delete id="deleteReply">
+		DELETE FROM REPLY
+		WHERE  reply_id = #{reply_id}
+	</delete>
+	
+	<insert id="go_comm">
+		INSERT INTO COMMUTE(user_id, comm_date, go_date, com_type)
+		VALUES (#{user_id}, now(), now(), '출근')
+	</insert>
+	
+	<update id="off_comm">
+	   UPDATE COMMUTE
+	   SET off_date = now(), com_type = '퇴근'
+	   WHERE user_id = #{user_id}
+	   AND comm_date = #{comm_date}
+	</update>
+	
+	<select id="get_todayComm" resultType="Commute">
+		SELECT *
+		FROM COMMUTE
+		WHERE user_id = #{user_id}
+		AND comm_date = #{comm_date}
+	</select>
+	
+</mapper>

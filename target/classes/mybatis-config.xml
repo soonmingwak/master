@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Boarder" type="com.psw.chating.vo.Boarder" />
+		<typeAlias alias="Reply" type="com.psw.chating.vo.Reply" />
+		<typeAlias alias="UploadFile" type="com.psw.chating.vo.UploadFile" />
+		<typeAlias alias="Commute" type="com.psw.chating.vo.Commute" />
+		<typeAlias alias="Member" type="com.psw.chating.vo.Member" />
+		<typeAlias alias="Authmail" type="com.psw.chating.vo.Authmail" />
+	</typeAliases>
+</configuration>
