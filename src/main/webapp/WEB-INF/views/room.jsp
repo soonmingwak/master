@@ -29,8 +29,14 @@
 	margin-bottom: 20px;
 }
 
-.roomContainer {
-	background-color: #F6F6F6;
+.roomContainer1 {
+	background-color: #ffffff;
+	width: 370px;
+	height: 500px;
+	overflow: auto;
+}
+.roomContainer2 {
+	background-color: #ffffff;
 	width: 370px;
 	height: 500px;
 	overflow: auto;
@@ -41,16 +47,21 @@
 }
 
 .roomList th {
-	border: 1px solid #FFBB00;
-	background-color: #fff;
-	color: #FFBB00;
+	border: 1px solid #4E4D51;
+	background-color: #4E4D51;
+;
+	color: #F4FFFF;
+	text-align: center;
+	font-weight: bold
 }
 
 .roomList td {
-	border: 1px solid #FFBB00;
-	background-color: #fff;
+	border: 1px solid #4E4D51;
+	background-color: #4E4D51;
+;
 	text-align: left;
-	color: #FFBB00;
+	color: #F4FFFF;
+	font-weight: bold
 }
 
 .roomList .num {
@@ -75,6 +86,10 @@
 .inputTable input {
 	width: 200px;
 	height: 25px;
+}
+.inputTable2 input {
+	width: 370px;
+	height: 60px;
 }
 </style>
 </head>
@@ -200,7 +215,7 @@
 								+ "<td class='room'>"
 								+ rn
 								+ "</td>"
-								+ "<td class='go'><button type='button' onclick='goRoom(\""
+								+ "<td class='go'><button type='button' class='btn btn-dark font-weight-bold text-white' onclick='goRoom(\""
 								+ roomNumber + "\", \"" + rn
 								+ "\")'>참여</button></td>" + "</tr>";
 					});
@@ -232,41 +247,42 @@
 		style="margin-top: 150px; margin-left: 600px;">
 		<div class=row>
 			<div class="col-lg-6">
-				<h1>${roomName}의채팅방</h1>
-
+			<h2><span class="badge badge-secondary">${roomName}</span></h2>
 				<input type="hidden" id="sessionId" value=""> <input
 					type="hidden" id="roomNumber" value="${roomNumber}">
 
-				<div id="chating" class="roomContainer"></div>
+				<div id="chating" class="border border-dark roomContainer1"></div>
 
 				<div id="yourName">
-					<table class="inputTable">
-						<tr>
-							<th><input type="text" name="userName" id="userName"></th>
-							<th><button onclick="chatName()" id="startBtn">이름
-									등록</button></th>
-						</tr>
-					</table>
+<!-- 					<table class="inputTable"> -->
+<!-- 						<tr> -->
+<!-- 							<th><input type="text" name="userName" id="userName"></th> -->
+<!-- 							<th><button type="button" class="btn btn-dark" onclick="chatName()" id="startBtn">이름 -->
+<!-- 									등록</button></th> -->
+<!-- 						</tr> -->
+<!-- 					</table> -->
 				</div>
 				<div id="yourMsg">
-					<table class="inputTable">
+					<table class="inputTable2">
 						<tr>
 							<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
-							<th><button onclick="send()" id="sendBtn">보내기</button></th>
+							<th><button type="button" class="btn btn-dark" style="margin-top: 20px;" onclick="send()" id="sendBtn">보내기</button></th>
 						</tr>
 					</table>
 				</div>
 				</div>
+				
 				<div class="col-lg-6">
-					<h1>채팅방</h1>
-					<div id="roomContainer" class="roomContainer">
+				
+					<h2><span class="badge badge-secondary">채팅방</span><button type="button" class="btn btn-dark" style="margin-left: 200px; font-weight: bold;" id="createRoom">방 생성</button></h2>
+					<div id="roomContainer" class="roomContainer2">
 						<table id="roomList" class="roomList"></table>
 					</div>
 					<div>
 						<table class="inputTable">
 							<tr>
 								<th><input type="hidden" name="roomName" id="roomName"></th>
-								<th><button type="button" class="btn btn-primary" style="margin-left: 415px;" id="createRoom">방 만들기</button></th>
+								<th></th>
 							</tr>
 						</table>
 					</div>
