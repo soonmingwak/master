@@ -19,7 +19,7 @@
 				alert(msg);
 		});
 	</script>
-           <jsp:include page="/WEB-INF/views/nav/mainNav.jsp" />
+           <jsp:include page="/WEB-INF/views/oo.jsp" />
         <div class="container" style="margin-top: 80px; margin-right: 200px;">
 	<div class="row">
 	<div class="col-lg-10">

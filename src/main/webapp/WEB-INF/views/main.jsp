@@ -11,6 +11,6 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/nav/mainNav.jsp" />
+<jsp:include page="/WEB-INF/views/oo.jsp" />
 </body>
 </html>
