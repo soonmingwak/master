@@ -38,6 +38,10 @@ public class MainController {
 	public String main() {
 		return "main";
 	}
+	@RequestMapping(value = "/oo")
+	public String oo() {
+		return "oo";
+	}
 
 	@RequestMapping(value = "/calender")
 	public String calender() {

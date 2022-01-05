@@ -49,28 +49,26 @@ $(document).ready(function() {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/nav/mainNav.jsp" />
-	<div class="container" style="margin-top: 200px;">
-		<div class="container" style="width: 500px;">
-			<table class="table table-info">
-				<thead>
+	<div class="container-fluid">
+ 			<table class="table table-secondary" style="width: 350px; height: 100px; margin-top: 200px; margin-left: 900px;">
+				<thead class="thead-dark">
 					<tr>
-						<th class="text-dark font-weight-bold text-center" style="border:3px solid #46C6C6;"><h1>출.퇴근 체크</h1></th>
+						<th class="font-weight-bold text-center" style=><h2>출.퇴근 체크</h2></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr style="border:3px solid #46C6C6;">
-						<td style="height: 150px; text-align: center;"><h2 id="status">${commute.com_type }</h2></td>
+					<tr>
+						<td style="height: 100px; text-align: center;"><h2 id="status">${commute.com_type }</h2></td>
 					</tr>
-					<tr style="border:3px solid #46C6C6;">
+					<tr>
 						<td style="height: 50px;" >
-							<button type="button" style="margin-top: 240px;" class="btn btn-primary" id="go_btn">출근</button>
-							<button type="button" style="margin-top: 240px;" class="btn btn-danger" id="off_btn">퇴근</button>
-							<a href="${path}/attcheck" class="btn btn-success" style="margin-top: 240px; margin-left: 200px;">출.퇴근 현황</a>
+							<button type="button" class="btn btn-success" id="go_btn">출근</button>
+							<button type="button" class="btn btn-danger" id="off_btn">퇴근</button>
+							<a href="${path}/attcheck" class="btn btn-info" style="margin-left: 86px;">출.퇴근 현황</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-	</div>
 </body>
 </html>

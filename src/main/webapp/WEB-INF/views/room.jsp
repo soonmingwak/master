@@ -30,13 +30,13 @@
 }
 
 .roomContainer1 {
-	background-color: #ffffff;
+	background-color: #4E4D51;
 	width: 370px;
 	height: 500px;
 	overflow: auto;
 }
 .roomContainer2 {
-	background-color: #ffffff;
+	background-color:#4E4D51;
 	width: 370px;
 	height: 500px;
 	overflow: auto;
@@ -265,7 +265,7 @@
 				<div id="yourMsg">
 					<table class="inputTable2">
 						<tr>
-							<th><input id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
+							<th><input class="bg-light" id="chatting" placeholder="보내실 메시지를 입력하세요."></th>
 							<th><button type="button" class="btn btn-dark" style="margin-top: 20px;" onclick="send()" id="sendBtn">보내기</button></th>
 						</tr>
 					</table>

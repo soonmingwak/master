@@ -20,18 +20,21 @@
 		});
 	</script>
            <jsp:include page="/WEB-INF/views/nav/mainNav.jsp" />
-        <div class="container" style="margin-top: 100px;">
+        <div class="container" style="margin-top: 80px; margin-right: 200px;">
 	<div class="row">
 	<div class="col-lg-10">
-			<table class="table table-striped"
-				style="text-align: center; border: 1px solid #bbbbbb">
-				<thead>
+			<div><button style="width:457px; " type="button" class="btn btn-dark font-weight-bold disabled">공지 사항</button>
+			<button style="width:458px;" type="button" class="btn btn-dark font-weight-bold">건의사항</button> 
+			</div>
+			<table class="table table-hover "
+				style="text-align: center;">
+				<thead class="thead-dark">
 					<tr>
-						<th style="background-color: #dddddd; text-align: center;">번호</th>
-						<th style="background-color: #dddddd; text-align: center;">제목</th>
-						<th style="background-color: #dddddd; text-align: center;">조회수</th>
-						<th style="background-color: #dddddd; text-align: center;">작성자</th>
-						<th style="background-color: #dddddd; text-align: center;">작성일</th>
+						<th style="text-align: center;">번호</th>
+						<th style="text-align: center;">제목</th>
+						<th style="text-align: center;">조회수</th>
+						<th style="text-align: center;">작성자</th>
+						<th style="text-align: center;">작성일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -76,7 +79,7 @@
 				</c:if>
 
 			</ul>
-			<a href="${path}/write" class="btn btn-info">글쓰기</a>
+			<a href="${path}/write" class="btn btn-dark">글쓰기</a>
 		</div>
 		</div>
 		</div>
